@@ -166,5 +166,5 @@ function printing() {
    console.log(4);
 }
 
-printing(); // settimeout 2 -> 3 -> 4 ->1
+printing(); // settimeout 1 -> 4 -> 2 -> 3
 ```
