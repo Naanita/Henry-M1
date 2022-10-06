@@ -14,7 +14,19 @@ function bubbleSort(array) {
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
   // Tu código:
-
+  var arrayFactores = [1] //porque siempre debe comenzar en 1 porque todo numero multiplicado por 1 es el mismo.
+  var divisor = 2
+  
+  while (num > 1){ //mientras numm sea mayor a 1 ejecute lo siguiente.
+  if (num % divisor === 0) {
+  arrayFactores.push (divisor) 
+   num = num / divisor
+  }
+  else {
+  divisor++
+  }
+  }
+  return arrayFactores
 }
 
 
@@ -23,7 +35,19 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-
+  var huboCambio = true;
+  while(huboCambio){ // mientras sea true cambiala a false
+  hubocambio = false; 
+  for (let i = 0; i < array.length; i++){
+  if ( array[i] > array [i+1]){
+  var aux = array [i]
+  array[i] = array [i + 1]
+  array [i + 1] = aux 
+  huboCambio = true
+  }
+  }
+  }
+  return array;
 }
 
 
@@ -32,7 +56,16 @@ function selectionSort(array) {
   // el array recibido como parámetro utilizando dos arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-
+  for (let i = 1; i < array.length; i++){
+    var j = i - 1
+    var aux = array [i] // con quien vamos a ir comparando 
+    while (j>=0 && array[j] > aux){
+    array [j+1] = array [j]
+    j--
+    }
+    arra[j+1] = aux 
+    }
+    return array;
 }
 
 
