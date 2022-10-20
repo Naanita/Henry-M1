@@ -54,7 +54,7 @@ function cacheFunction(cb) {
     return cache[arg];
   }
   let aux = cb(arg);
-  cache[arg] = aux 
+  cache[arg] = aux  
   return aux; 
  }
 }

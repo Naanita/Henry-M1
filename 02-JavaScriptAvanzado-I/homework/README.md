@@ -32,8 +32,8 @@ console.log(x); //1
 ```javascript
 console.log(bar); // undefined
 console.log(baz); // not definend 
-foo();
-function foo() { console.log('Hola!'); }
+foo(); 
+function foo() { console.log('Hola!'); } // Hola! 
 var bar = 1;
 baz = 2;
 ```
@@ -111,7 +111,7 @@ function test() {
    }
 }
 
-test(); // En el primer caso devuelve undefined, porque la variable no se declaro antes de implimir (a) y en el seguundo caso devuelve 2, porque es lo que se le solicita que retorne de manera directa.
+test(); // En el primer caso devuelve undefined, porque la variable no se declaro antes de imprimir (a) y en el seguundo caso devuelve 2, porque es lo que se le solicita que retorne de manera directa.
 ```
 
 Y el de este código? :
@@ -127,7 +127,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false); // retorna "friskies" porque la variable se declaro dentro de la función.
+getFood(false); // retorna undefinend porque  lo retorno antes 
 ```
 
 
@@ -147,11 +147,11 @@ var obj = {
    }
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); // si el this esta en su mismo contexto de ejecución o en su mismo bloque de codigo busca allí dentro, por lo que retorna "Aurelio de Rosa". 
 
 var test = obj.prop.getFullname;
 
-console.log(test()); // devuelve el nombre completo
+console.log(test()); //                                  
 ```
 
 ### Event loop
@@ -166,5 +166,5 @@ function printing() {
    console.log(4);
 }
 
-printing(); // settimeout 1 -> 4 -> 2 -> 3
+printing(); //  1 -> 4 -> 3 -> 2
 ```

@@ -16,7 +16,16 @@ const {
 
 var countArray = function(array) {
     // Tu código aca:
-    
+let count = 0; 
+for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (Array.isArray(element)){
+        count += countArray(element); 
+    }else{
+        count += element; 
+    }
+}   
+return count; 
 }
 
 
@@ -39,7 +48,15 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
+    let count = 0; 
+    for(const prop in obj){
+        count++;
+        if(typeof obj[prop] === "object" && !Array.isArray(obj[prop])){
+        count = count + countProps(obj[prop]);
 
+        }
+    }
+    return count;
 }
 
 
@@ -53,6 +70,16 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
+let count = 0; 
+let current = this.head 
+while(current){//donde tenga donde ir
+    if(isNaN(current.value)){
+        current.value = "Kiricocho";
+        count++; 
+    }
+    current = current.next;
+} 
+return count; 
 
 }
 
@@ -67,7 +94,14 @@ LinkedList.prototype.changeNotNumbers = function(){
 
 var mergeQueues = function(queueOne, queueTwo) {
     // Tu código aca:
-
+const miQueue = new Queue(); 
+while(queueOne.size() || queueTwo.size()){
+    const num1 = queueOne.dequeue(); 
+    const num2 = queueTwo.dequeue(); 
+    if(num1) miQueue.enqueue(num1);
+    if(num2) miQueue.enqueue(num2); 
+}
+return miQueue; 
 }
 
 
@@ -82,14 +116,20 @@ var mergeQueues = function(queueOne, queueTwo) {
 
 var closureMult = function(multiplier) {
     // Tu código aca:
-
+return function (n){
+return n * multiplier;
+}
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
 BinarySearchTree.prototype.sum = function() {
     // Tu código aca:
-
+let count = 0;
+count = count + this.value;
+if(this.left) count = count + this.left.sum();
+if(this.right) count = count + this.right.sum();
+return count; 
 }
 
 module.exports = {

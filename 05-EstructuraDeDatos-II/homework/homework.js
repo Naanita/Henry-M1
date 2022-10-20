@@ -12,65 +12,67 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
 */
 
 function LinkedList(){
-  this.head = null;
+this.head = null; //creo la cabeza que como no hay nodos dentro empieza con un null
 }
 
+LinkedList.prototype.add = function (value){
+  var node = new Node (value), // declaramos una variable nodo que va a ser igual a crea un nuevo nodo que recibe como parametro un valor 
+  current = this.head;//el current (p Actual) es igual a la cabeza de la lista, es decir se posiciona en la primera posción.
+
+  if(current === null){ // si current es estrictamente igual a null, lo que quiere decir es que si en la posición actual no hay nada ( porque como ya dijismos si this.head es igual a null quiere decir que no la lista esta vacia) entonces en this.head mete el nuevo nodo creado y devuelvelo. 
+    this.head = node;  
+    return node; 
+  }
+  while(current.next){ //Mientras current.next exista es decir que haya algo avanza un paso hasta que no sea null
+    current = current.next
+  }
+current.next = node;
+return node; 
+};
 
 
+LinkedList.prototype.remove = function(){
+if(this.head === null) return null //Acá preguntamos si la lista esta vacia retornar null 
+if(this.head.next === null){
+let auxiliar = this.head 
+this.head = null 
+return auxiliar.value;
+}
+else{
+  var current = this.head;
+while(current.next.next !== null){
+ current = current.next 
+}
+let auxiliar = current.next.value
+current.next = null;
+return auxiliar; 
+}
+};
+
+LinkedList.prototype.search = function (value){
+if( this.head === null) return null
+var current = this.head; 
+while(current !== null){
+  if( typeof value === "function"){
+    if(value(current.value) === true ){
+      return current.value
+    }
+  }
+  if(current.value === value) return current.value
+  else{
+    current = current.next 
+  }
+}
+return null
+}
 
 function Node(value) {
-  this.value = value 
-  this.next = null
+this.value = value; 
+this.next = null; 
 }
-LinkedList.prototype.add = function(value){
-  let nodo = new Node(value)
-  if(!this.head){// if (this. head === null) 
-    this.head = nodo 
-  }
-  else {
-    let current = this.head 
-    while(current.next){
-      current = current.next
-    }
-    current.next = nodo
-  }
 
-   }
-  
-LinkedList.prototype.remove = function(){
-  if(!this.head) return null 
-  if (this.head.next === null){
-let aux = this.head 
-this.head = null 
-return aux.value
-  }
-  else{
-    let current = this.head
-  //mientras               !diferente de null
-    while(current.next.next !== null){
-      current = current.next 
-    }
-    let aux = current.next.value 
-    current.next = null 
-    return aux
-  }
-}
-LinkedList.prototype.search = function(value){
-  if(!this.head) return null
-  var current = this.head
-  while(current !== null){
-    if(typeof value === "function"){
-      if(value(current.value) === true ){
-        return current.value
-      }
-    }//
-    if(current.value === value) return current.value
-    else{
-      current = current.next 
-    }
-  }
-  return null
-}
+
+
 /* 
 Implementar la clase HashTable.
 
@@ -87,34 +89,36 @@ Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero
 */
 
 function HashTable() {
-this.numBuckets=35
-this.buckets = []
-
-  
-}
-HashTable.prototype.set = function(key, value){
-var index = this.hash(key)
-if(typeof key !== "string") throw new TypeError('Keys must be strings')
-if(!this.buckets[index]){
-  this.buckets[index] = {}
-}
-this,this.buckets[index][key] = value
-}
-HashTable.prototype.get = function(key){
-  var index =this.hash (key)
-   return this. buckets[index][key]
-}
-HashTable.prototype.hasKey = function(key){
-  var index = this.hash(key)
-  return this.buckets[index].hasOwnProperty(key)
-}
-HashTable.prototype.hash = function(key){
-  var total = 0
-  for (let i = 0; i < key.length; i++){
-    total = total + key.charCodeAt(i)
+  this.numBuckets = 35; 
+  this.buckets = [ ];
   }
-  return total % this.numBuckets
-}
+  
+  HashTable.prototype.hash = function (string){
+  var suma = 0;
+  for (let i = 0; i < string.length; i++){
+  suma = suma + string.charCodeAt(i); 
+  }
+  return suma % this.numBuckets; 
+  
+  };
+  HashTable.prototype.set = function (key, value){
+  if(typeof key !== "string"){ throw new TypeError('Keys must be strings')}
+  var index = this.hash(key);
+  if(!this.buckets[index]) // si no tengo nada en esta posción haz lo siguiente:
+  {this.buckets[index] = {};}
+   this.buckets[index][key] = value; 
+  
+  };
+  HashTable.prototype.get = function (key){
+  var index = this.hash(key); 
+  return this.buckets[index][key]; 
+  };
+  HashTable.prototype.hasKey = function (key){
+    var index = this.hash(key); 
+    return this.buckets[index].hasOwnProperty(key);
+    };
+    
+  
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
